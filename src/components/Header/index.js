@@ -25,7 +25,7 @@ const Header = props => {
               <img src={imageUrl} alt="nxt watch logo" />
             </Link>
             <div>
-              <button type="button" onClick={toggleTheme}>
+              <button type="button" data-testid="theme" onClick={toggleTheme}>
                 {activeTheme === 'light' ? <FaMoon /> : <BsSun />}
               </button>
               <img

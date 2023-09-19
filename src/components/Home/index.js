@@ -92,7 +92,15 @@ class Home extends Component {
       case apiStatusConstants.success:
         return (
           <div className={activeTheme}>
-            <Popup open className="popup-content">
+            <Popup
+              data-testid="banner"
+              open
+              className="popup"
+              overlayStyle={{
+                backgroundColor: '#ffffff',
+                height: '20vh',
+              }}
+            >
               {close => (
                 <>
                   <div className="hor-card">
@@ -100,7 +108,11 @@ class Home extends Component {
                       src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
                       alt="nxt watch logo"
                     />
-                    <button type="button" onClick={() => close()}>
+                    <button
+                      data-testid="close"
+                      type="button"
+                      onClick={() => close()}
+                    >
                       <AiOutlineClose />
                     </button>
                   </div>
@@ -119,7 +131,13 @@ class Home extends Component {
                   onChange={this.onChangeSearchInput}
                   value={searchInput}
                 />
-                <AiOutlineSearch />
+                <button
+                  type="button"
+                  onClick={this.getVideosList}
+                  data-testid="searchButton"
+                >
+                  <AiOutlineSearch />
+                </button>
               </div>
               <ul className="videos-list">
                 {videosList.map(each => (
@@ -142,13 +160,13 @@ class Home extends Component {
           const {activeTheme} = value
 
           return (
-            <>
+            <div data-testid="home">
               <Header />
               <div className={`hor-card ${activeTheme}`}>
                 <Sidebar />
                 {this.renderPageDetails(activeTheme)}
               </div>
-            </>
+            </div>
           )
         }}
       </ThemeContext.Consumer>

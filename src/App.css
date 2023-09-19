@@ -24,5 +24,13 @@ body {
 .hor-card {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+}
+
+.ver-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  height: 100vh;
 }
