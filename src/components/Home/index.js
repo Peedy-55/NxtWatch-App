@@ -46,10 +46,21 @@ class Home extends Component {
     const response = await fetch(url, options)
     if (response.ok === true) {
       const data = await response.json()
-      console.log(data.videos)
+      console.log(data.videos, 'HOME VIDEOS LIST')
+      const formattedData = data.videos.map(each => ({
+        channel: {
+          name: each.channel.name,
+          profileImageUrl: each.channel.profile_image_url,
+        },
+        id: each.id,
+        publishedAt: each.published_at,
+        thumbnailUrl: each.thumbnail_url,
+        title: each.title,
+        viewCount: each.view_count,
+      }))
       this.setState({
         pageStatus: apiStatusConstants.success,
-        videosList: data.videos,
+        videosList: formattedData,
       })
     } else {
       this.setState({

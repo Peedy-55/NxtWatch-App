@@ -39,7 +39,7 @@ const Sidebar = () => (
             </Link>
           </ul>
           <div>
-            <h1>CONTACT US</h1>
+            <p>CONTACT US</p>
             <div className="hor-card">
               <img
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"

@@ -3,17 +3,7 @@ import {formatDistanceToNow} from 'date-fns'
 
 const VideoItem = props => {
   const {videoItemDetails} = props
-  const formattedVideoItemDetails = {
-    channel: {
-      name: videoItemDetails.channel.name,
-      profileImageUrl: videoItemDetails.channel.profile_image_url,
-    },
-    id: videoItemDetails.id,
-    publishedAt: videoItemDetails.published_at,
-    thumbnailUrl: videoItemDetails.thumbnail_url,
-    title: videoItemDetails.title,
-    viewCount: videoItemDetails.view_count,
-  }
+
   const {
     channel,
     publishedAt,
@@ -21,10 +11,10 @@ const VideoItem = props => {
     title,
     viewCount,
     id,
-  } = formattedVideoItemDetails
+  } = videoItemDetails
   const {name, profileImageUrl} = channel
 
-  const distanceToNow = formatDistanceToNow(new Date(publishedAt))
+  //   const distanceToNow = formatDistanceToNow(new Date(publishedAt))
 
   return (
     <Link to={`/videos/${id}`}>
@@ -37,7 +27,7 @@ const VideoItem = props => {
             <p>{name}</p>
             <div className="hor-card">
               <p>{viewCount}</p>
-              <p>{distanceToNow}</p>
+              <p>{formatDistanceToNow(new Date(publishedAt))}</p>
             </div>
           </div>
         </div>

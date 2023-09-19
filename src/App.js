@@ -25,17 +25,15 @@ class App extends Component {
         savedVideosList: [...prevState.savedVideosList, videoItemDetails],
       }))
     } else {
-      //   const filteredList = savedVideosList.filter(
-      //     each => each !== videoItemDetails,
-      //   )
-      this.setState(prevState => ({
-        savedVideosList: prevState.savedVideosList.map(each => {
-          if (each !== videoItemDetails) {
-            return each
-          }
-          return null
-        }),
-      }))
+      const filteredList = savedVideosList.filter(
+        each => each !== videoItemDetails,
+      )
+      this.setState(
+        {
+          savedVideosList: filteredList,
+        },
+        console.log(savedVideosList),
+      )
     }
   }
 
@@ -59,13 +57,14 @@ class App extends Component {
         <Switch>
           <Route exact path="/login" component={LoginForm} />
           <ProtectedRoute exact path="/" component={Home} />
-          {/* <ProtectedRoute exact path="/gaming" component={Gaming} /> */}
+          <ProtectedRoute exact path="/gaming" component={Gaming} />
           <ProtectedRoute
             exact
             path="/videos/:id"
             component={VideoItemDetails}
           />
           <ProtectedRoute exact path="/trending" component={Trending} />
+          <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
           <Route path="/not-found" component={NotFound} />
           <Redirect to="not-found" />
         </Switch>

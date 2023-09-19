@@ -34,3 +34,11 @@ body {
   align-items: center;
   height: 100vh;
 }
+
+.active {
+  color: #2563eb;
+}
+
+.login-button {
+  color: #ffffff;
+}

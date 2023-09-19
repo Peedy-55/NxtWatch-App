@@ -8,6 +8,7 @@ class LoginForm extends Component {
     username: '',
     password: '',
     showSubmitError: false,
+    errorMsg: '',
     showPassword: false,
   }
 
@@ -29,12 +30,22 @@ class LoginForm extends Component {
   }
 
   onSubmitFailure = () => {
-    this.setState({showSubmitError: true})
+    this.setState({
+      showSubmitError: true,
+      errorMsg: "*Username and Password didn't match",
+    })
   }
 
   submitForm = async event => {
     event.preventDefault()
     const {username, password} = this.state
+    if (username.length === 0 || password.length === 0) {
+      this.setState({
+        showSubmitError: true,
+        errorMsg: 'Username or Password must not be empty',
+      })
+      return
+    }
     const userDetails = {username, password}
     const url = 'https://apis.ccbp.in/login'
     const options = {
@@ -97,7 +108,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    const {showSubmitError, showPassword} = this.state
+    const {showSubmitError, showPassword, errorMsg} = this.state
     const jwtToken = Cookies.get('jwt_token')
 
     if (jwtToken !== undefined) {
@@ -126,9 +137,7 @@ class LoginForm extends Component {
           <button type="submit" className="login-button">
             Login
           </button>
-          {showSubmitError && (
-            <p className="error-message">*Username and Password didn't match</p>
-          )}
+          {showSubmitError && <p className="error-message">{errorMsg}</p>}
         </form>
       </div>
     )

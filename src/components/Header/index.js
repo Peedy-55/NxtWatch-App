@@ -1,4 +1,5 @@
 import {Link, withRouter} from 'react-router-dom'
+import Popup from 'reactjs-popup'
 import Cookies from 'js-cookie'
 import {BsSun} from 'react-icons/bs'
 import {FaMoon} from 'react-icons/fa'
@@ -22,7 +23,7 @@ const Header = props => {
         return (
           <nav className={`hor-card ${activeTheme}`}>
             <Link to="/">
-              <img src={imageUrl} alt="nxt watch logo" />
+              <img src={imageUrl} alt="website logo" />
             </Link>
             <div>
               <button type="button" data-testid="theme" onClick={toggleTheme}>
@@ -32,9 +33,27 @@ const Header = props => {
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
                 alt="profile"
               />
-              <button type="button" onClick={onClickLogout}>
-                Logout
-              </button>
+
+              <Popup
+                modal
+                data-testid="banner"
+                className="popup"
+                trigger={<button type="button">Logout</button>}
+              >
+                {close => (
+                  <div>
+                    <p>Are you sure, you want to logout?</p>
+                    <div className="hor-card">
+                      <button type="button" onClick={() => close()}>
+                        Cancel
+                      </button>
+                      <button type="button" onClick={onClickLogout}>
+                        Confirm
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </Popup>
             </div>
           </nav>
         )

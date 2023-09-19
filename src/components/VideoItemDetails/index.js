@@ -21,7 +21,6 @@ class VideoItemDetails extends Component {
     videoItemDetails: {},
     pageStatus: apiStatusConstants.initial,
     isLiked: false,
-    isSaved: false,
   }
 
   componentDidMount = () => {
@@ -61,6 +60,7 @@ class VideoItemDetails extends Component {
         viewCount: data.video_details.view_count,
       }
       //   console.log(formattedData)
+
       this.setState({
         pageStatus: apiStatusConstants.success,
         videoItemDetails: formattedData,
@@ -74,6 +74,7 @@ class VideoItemDetails extends Component {
 
   onClickSave = updateSavedVideosList => {
     const {videoItemDetails} = this.state
+
     updateSavedVideosList(videoItemDetails)
   }
 
@@ -96,18 +97,22 @@ class VideoItemDetails extends Component {
     updateSavedVideosList,
     savedVideosList,
   ) => {
-    const {pageStatus, videoItemDetails} = this.state
-    console.log(videoItemDetails)
+    const {pageStatus, videoItemDetails, isLiked} = this.state
+
     const {
       channel,
       description,
-      id,
+      //   id,
       publishedAt,
-      thumbnailUrl,
+      //   thumbnailUrl,
       title,
       videoUrl,
       viewCount,
     } = videoItemDetails
+
+    // console.log(videoItemDetails)
+
+    console.log(new Date(publishedAt))
     // console.log(channel, pageStatus)
     // console.log(publishedAt)
     // const distanceToNow = formatDistanceToNow(new Date(publishedAt))
@@ -120,6 +125,8 @@ class VideoItemDetails extends Component {
       savedVideosList.findIndex(each => each === videoItemDetails) === -1
         ? 'Save'
         : 'Saved'
+    const likeClassName = isLiked ? 'active' : ''
+    const dislikeClassName = isLiked ? '' : 'active'
     switch (pageStatus) {
       case apiStatusConstants.loading:
         return (
@@ -148,7 +155,7 @@ class VideoItemDetails extends Component {
         return (
           <div className={activeTheme}>
             <ReactPlayer url={videoUrl} controls />
-            <h1>{title}</h1>
+            <p>{title}</p>
             <div className="hor-card">
               <div className="hor-card">
                 <p>{viewCount}</p>
@@ -156,13 +163,21 @@ class VideoItemDetails extends Component {
               </div>
               <div className="hor-card">
                 <div className="hor-card">
-                  <button type="button" onClick={this.onClickLike}>
+                  <button
+                    className={likeClassName}
+                    type="button"
+                    onClick={this.onClickLike}
+                  >
                     <BiLike />
                     <p>Like</p>
                   </button>
                 </div>
                 <div className="hor-card">
-                  <button type="button" onClick={this.onClickDislike}>
+                  <button
+                    className={dislikeClassName}
+                    type="button"
+                    onClick={this.onClickDislike}
+                  >
                     <BiDislike />
                     <p>Dislike</p>
                   </button>
