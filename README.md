@@ -51,4 +51,3 @@ In this project, a **Nxt Trendz - Cart Features** was implemented by applying va
 - Implement the required functionalities for each feature.
 - Use the provided API responses and URLs for fetching data.
 
-Feel free to ask for further clarification on any specific aspect.
